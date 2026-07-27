@@ -1,9 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Syne, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import PlausibleProvider from 'next-plausible'
 
-const inter = Inter({ subsets: ['latin'] })
+const display = Syne({
+    subsets: ['latin'],
+    variable: '--font-display',
+    weight: ['600', '700', '800']
+})
+
+const sans = Source_Sans_3({
+    subsets: ['latin'],
+    variable: '--font-sans',
+    weight: ['400', '500', '600', '700']
+})
 
 const APP_NAME = 'CodeTidyup'
 const APP_URL = 'https://codetidyup.com'
@@ -56,7 +66,7 @@ export default function RootLayout({
                     enabled={true}
                 />
             </head>
-            <body className={inter.className}>{children}</body>
+            <body className={`${display.variable} ${sans.variable} font-sans antialiased`}>{children}</body>
         </html>
     )
 }
