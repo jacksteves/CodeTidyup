@@ -3,19 +3,151 @@
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+    --ink: #12151a;
+    --ink-soft: #2a3038;
+    --fog: #e8eef2;
+    --mist: #f3f6f8;
+    --foam: #ffffff;
+    --accent: #0d9488;
+    --accent-deep: #0f766e;
+    --muted: rgba(18, 21, 26, 0.55);
+    --line: rgba(18, 21, 26, 0.1);
+    --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    color: rgb(var(--foreground-rgb));
-    background: #f4f4f5;
+    color: var(--ink);
+    background: var(--mist);
+    min-height: 100vh;
 }
 
 @layer utilities {
     .text-balance {
         text-wrap: balance;
+    }
+}
+
+/* Soft studio atmosphere — cool mist, not flat gray */
+.page-atmosphere {
+    position: relative;
+    isolation: isolate;
+    background:
+        radial-gradient(ellipse 90% 60% at 10% -10%, rgba(13, 148, 136, 0.14), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 95% 5%, rgba(14, 116, 144, 0.12), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(245, 158, 11, 0.08), transparent 55%),
+        linear-gradient(180deg, #eef3f6 0%, #f5f7f9 45%, #eef2f4 100%);
+}
+
+.page-atmosphere::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.35;
+    background-image: var(--grain);
+    background-size: 180px 180px;
+    mix-blend-mode: multiply;
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes canvas-in {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.985);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes swatch-pop {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-rise {
+    animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-rise-delay {
+    animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+.animate-rise-delay-2 {
+    animation: rise-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+.animate-canvas {
+    animation: canvas-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+}
+
+.theme-swatch {
+    animation: swatch-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.theme-swatch:nth-child(1) {
+    animation-delay: 0.28s;
+}
+.theme-swatch:nth-child(2) {
+    animation-delay: 0.34s;
+}
+.theme-swatch:nth-child(3) {
+    animation-delay: 0.4s;
+}
+.theme-swatch:nth-child(4) {
+    animation-delay: 0.46s;
+}
+.theme-swatch:nth-child(5) {
+    animation-delay: 0.52s;
+}
+
+/* Code window depth without heavy multi-shadow stacks */
+.code-frame {
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.35) inset,
+        0 18px 40px -24px rgba(18, 21, 26, 0.45);
+    transition: background 0.45s ease;
+}
+
+.code-chrome {
+    box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.55);
+}
+
+.cm-editor {
+    background: transparent !important;
+}
+
+.cm-gutters {
+    background: transparent !important;
+    border: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-rise,
+    .animate-rise-delay,
+    .animate-rise-delay-2,
+    .animate-canvas,
+    .theme-swatch {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }

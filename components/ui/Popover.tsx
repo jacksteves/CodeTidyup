@@ -50,7 +50,7 @@ export const Popover = ({ anchor, options, buttonElement }: PopoverProps) => {
             <DefaultTransition>
                 <PopoverPanel
                     anchor={anchor}
-                    className='bg-white w-60 absolute z-10 p-1 border shadow-md rounded-md mt-2'>
+                    className='bg-white/95 backdrop-blur-sm w-60 absolute z-10 p-1 border border-ink/10 shadow-lg shadow-ink/5 rounded-lg mt-2'>
                     <div className='flex flex-col text-left'>
                         {options.map((option, index) => (
                             <PopoverOption key={index} {...option} />

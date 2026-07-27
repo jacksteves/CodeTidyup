@@ -9,8 +9,8 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-                serif: ['ui-serif', 'Georgia'],
+                display: ['var(--font-display)', 'ui-sans-serif', 'system-ui'],
+                sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
                 mono: ['ui-monospace', 'SFMono-Regular']
             },
             backgroundImage: {
@@ -18,11 +18,17 @@ const config: Config = {
                 'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
             },
             colors: {
-                textPrimary: 'rgba(0, 0, 0, 0.87)',
-                textSecondary: 'rgba(0, 0, 0, 0.6)',
-                textDisabled: 'rgba(0, 0, 0, 0.38)',
-                divider: 'rgba(0, 0, 0, 0.08)',
-                hover: 'rgba(0, 0, 0, 0.04)'
+                ink: '#12151a',
+                mist: '#f3f6f8',
+                accent: {
+                    DEFAULT: '#0d9488',
+                    deep: '#0f766e'
+                },
+                textPrimary: 'rgba(18, 21, 26, 0.92)',
+                textSecondary: 'rgba(18, 21, 26, 0.55)',
+                textDisabled: 'rgba(18, 21, 26, 0.35)',
+                divider: 'rgba(18, 21, 26, 0.1)',
+                hover: 'rgba(18, 21, 26, 0.04)'
             }
         }
     },

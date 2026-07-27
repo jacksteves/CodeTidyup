@@ -3,7 +3,7 @@ import { type PropsWithChildren } from 'react'
 interface TypographyProps {
     color?: 'textPrimary' | 'textSecondary' | 'textDisabled'
     className?: string
-    variant?: 'h1' | 'h2' | 'caption' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'button'
+    variant?: 'h1' | 'h2' | 'caption' | 'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'button' | 'brand'
 }
 
 export const Typography = ({
@@ -19,8 +19,9 @@ export const Typography = ({
     }
 
     const variants = {
-        h1: 'text-5xl lg:text-7xl font-black',
-        h2: 'text-4xl lg:text-5xl font-black',
+        brand: 'font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight',
+        h1: 'font-display text-5xl lg:text-7xl font-extrabold tracking-tight',
+        h2: 'font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight',
         subtitle1: 'text-base font-semibold',
         subtitle2: 'text-sm font-semibold',
         body1: 'text-base',
@@ -30,6 +31,8 @@ export const Typography = ({
     }
 
     switch (variant) {
+        case 'brand':
+            return <p className={`${colors[color]} ${variants[variant]} ${className}`}>{children}</p>
         case 'h1':
             return <h1 className={`${colors[color]} ${variants[variant]} ${className}`}>{children}</h1>
         case 'h2':
